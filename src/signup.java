@@ -5,6 +5,7 @@ import java.util.Scanner;
 class signup {
     public static void Signup (ArrayList<UserAccount> Account , Scanner sc){
         UserAccount userAccount = new UserAccount();
+        System.out.println("===============歡迎註冊本銀行帳號==================");
         //帳號
         System.out.println("輸入帳號");
         String Username = sc.next();
@@ -23,24 +24,11 @@ class signup {
             System.out.println("輸入密碼錯誤 , 請重新輸入");
         }
 
-        //生成隨機卡號(12位數)
-        Random r = new Random();
-        int [] CardNumber = new int[8];
-        while (true) {
-            //生成卡號
-            for (int i = 0 ; i < CardNumber.length ; i++) {
-                int Num = r.nextInt(10);
-                CardNumber[i] = Num;
-            }
-            //判斷是否有重複
-            if(Tools.ArrayCheck((Account) , CardNumber)){
-                userAccount.setCardNumber(CardNumber);
-                break;
-            }
-        }
+        String cardNumber = Tools.RandomCardNum(Account , sc);
+        userAccount.setCardNumber(cardNumber);
         Account.add(userAccount);
         System.out.println("帳號註冊完成 , 卡號為" );
-        Tools.printArray(CardNumber);
+        System.out.println(cardNumber);
 
     }
 }
