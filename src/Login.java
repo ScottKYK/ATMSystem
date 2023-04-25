@@ -11,20 +11,19 @@ class Login {
 
         System.out.println("輸入卡號");
         String CardNumber_in = sc.next();
-        int temp = 0;
         //確認有此帳號
-        UserAccount acc = Tools.checkCardNum(Account , CardNumber_in);
-            if (acc == null) {
-                System.out.println("無此帳號");
-                return; //跳出登入介面
-            }
+        UserAccount acc = Tools.checkCardNum(Account, CardNumber_in);
+        if (acc == null) {
+            System.out.println("無此帳號");
+            return; //跳出登入介面
+        }
 
         //確認密碼正確
         System.out.println("輸入密碼");
         while (true) {
             String passWord = sc.next();
             if (acc.getPassword().equals(passWord)) {
-                System.out.println(Account.get(temp).getUsername() + "您好 , 歡迎進入ATM系統");
+                System.out.println(acc.getUsername() + "您好 , 歡迎進入ATM系統");
                 break;
             } else {
                 System.out.println("密碼錯誤 , 請重新輸入");
@@ -35,41 +34,47 @@ class Login {
         //登入完之後,進入查詢頁面
         Inquiry inquiry = new Inquiry();
         while (true) {
+            System.out.println("==============歡迎使用本系統==============");
             System.out.println("請選擇以下功能");
             System.out.println("1. 顯示您的信息");
             System.out.println("2. 查詢餘額");
             System.out.println("3. 存款");
             System.out.println("4. 取款");
             System.out.println("5. 修改交易上限");
-            System.out.println("6. 修改密碼");
-            System.out.println("7. 退出");
+            System.out.println("6. 轉帳");
+            System.out.println("7. 修改密碼");
+            System.out.println("8. 退出");
             int function = sc.nextInt();
             switch (function) {
                 case 1:
                     //顯示信息
-                    inquiry.info(Account, sc, temp);
+                    inquiry.info(acc);
                     break;
                 case 2:
                     //查詢餘額
-                    inquiry.InquiryBalance(Account, sc, temp);
+                    inquiry.InquiryBalance(acc);
                     break;
                 case 3:
                     //存款
-                    inquiry.InputMoney(acc, sc, temp);
+                    inquiry.InputMoney(acc, sc);
                     break;
                 case 4:
                     //取款
-                    inquiry.OutputMoney(acc, sc, temp);
+                    inquiry.OutputMoney(acc, sc);
                     break;
                 case 5:
                     //修改交易上限
-                    inquiry.ModifyLimit(Account, sc, temp);
+                    inquiry.ModifyLimit(acc, sc);
                     break;
                 case 6:
-                    //修改密碼
-                    inquiry.ModifyPassword(Account, sc, temp);
+                    //轉帳
+                    inquiry.transfer(Account ,acc, sc);
                     break;
                 case 7:
+                    //修改密碼
+                    inquiry.ModifyPassword(acc, sc);
+                    break;
+                case 8:
                     //退出
                     System.out.println("退出ATM");
                     return;

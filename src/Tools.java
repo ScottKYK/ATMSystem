@@ -31,19 +31,6 @@ class Tools {
         }
         return null;
     }
-    //確認卡號登入時是否一致
-    public static boolean ArrayCheck2(ArrayList<UserAccount> Account, String CardNumber) {
-        if (Account.size() == 0) {
-            return true;
-        }
-        for (int i = 0; i < Account.size(); i++) {
-            if (Account.get(i).getCardNumber().equals(CardNumber)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
 
     //列印Array
     public static void printArray(int[] Array) {
@@ -52,15 +39,4 @@ class Tools {
         }
         System.out.println("");
     }
-
-    //將輸入的卡號(String)轉成Array
-    public static int[] CardNumber_Transfer(String CardNumber_in) {
-        int[] CardNumber_Array = new int[8];
-        for (int i = 0; i < CardNumber_Array.length; i++) {
-            CardNumber_Array[i] = CardNumber_in.charAt(i);
-        }
-        return CardNumber_Array;
-    }
-
-
 }

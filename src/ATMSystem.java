@@ -10,7 +10,7 @@ public class ATMSystem {
             System.out.println("請選擇以下功能");
             System.out.println("1. 登入帳戶");
             System.out.println("2. 註冊帳戶");
-            System.out.println("3. 註冊帳戶");
+            System.out.println("3. 退出系統");
             int function = sc.nextInt();
             switch (function){
                 case 1:
